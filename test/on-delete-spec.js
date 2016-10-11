@@ -1,13 +1,13 @@
 'use strict';
 const onDelete = require('../src/on-delete');
 
-describe('on-destroy', () => {
+describe('on-delete', () => {
   const RESULT_REJECT = {};
   let response;
 
   before(() => {
     mockery.registerMock('../src/on-error', (error, response) => response.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR));
-    mockery.registerAllowable('../src/on-destroy');
+    mockery.registerAllowable('../src/on-delete');
   });
 
   after(() => {
