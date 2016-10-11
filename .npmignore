@@ -1,0 +1,8 @@
+.editorconfig
+.gitignore
+.eslintignore
+.jsbeautifyrc
+.eslintrc*
+.travis*
+test/
+*spec.js

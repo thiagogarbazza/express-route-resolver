@@ -1,0 +1,44 @@
+{
+  "name": "express-route-resolver",
+  "version": "0.0.1-SNAPSHOT",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/ --opts test/mocha.opts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiagogarbazza/express-route-resolver.git"
+  },
+  "keywords": [
+    "ecmascript",
+    "es",
+    "express",
+    "javascript",
+    "js",
+    "promise",
+    "resolve",
+    "response",
+    "route"
+  ],
+  "author": "Thiago Garbazza <thiagogarbazza@gmail.com>",
+  "contributors": [
+    "Ramon Vicelli <ramonvicelli@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thiagogarbazza/express-route-resolver/issues"
+  },
+  "homepage": "https://github.com/thiagogarbazza/express-route-resolver#readme",
+  "dependencies": {
+    "http-status-codes": "^1.0.6",
+    "lodash": "^4.16.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint-config-restrict": "0.0.4",
+    "mocha": "^3.1.2",
+    "mockery": "^2.0.0",
+    "simple-mock": "^0.7.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": "restrict",
+  "rules": {
+    // Strict Mode
+    "filenames/no-index": "off"
+  }
+}
