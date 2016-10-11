@@ -1,5 +1,5 @@
 # express-route-resolver
-[![Build Status](https://travis-ci.org/thiagogarbazza/express-route-resolver.svg?branch=0.0.1)](https://travis-ci.org/thiagogarbazza/express-route-resolver)
+[![Build Status](https://travis-ci.org/thiagogarbazza/express-route-resolver.svg?branch=master)](https://travis-ci.org/thiagogarbazza/express-route-resolver)
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/thiagogarbazza/express-route-resolver/)
 
 ## Installation
