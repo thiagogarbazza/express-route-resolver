@@ -2,7 +2,7 @@
 const HttpStatus = require('http-status-codes');
 const onError = require('./on-error');
 
-module.exports = function onDestroy(response, promise) {
+module.exports = function onDelete(response, promise) {
   return promise
     .then(result => {
       if (result) {
