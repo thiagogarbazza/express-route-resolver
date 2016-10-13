@@ -2,7 +2,7 @@
 const HttpStatus = require('http-status-codes');
 const onError = require('./on-error');
 
-module.exports = function findById(response, promise) {
+module.exports = function onFindOne(response, promise) {
   return promise
     .then(result => {
       if (result) {
