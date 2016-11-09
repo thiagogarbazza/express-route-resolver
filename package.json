@@ -1,6 +1,6 @@
 {
   "name": "express-route-resolver",
-  "version": "0.0.2",
+  "version": "0.0.3-SNAPSHOT",
   "description": "Resolver simplified of routes for Express",
   "main": "index.js",
   "scripts": {
