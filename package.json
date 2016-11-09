@@ -32,7 +32,8 @@
   "homepage": "https://github.com/thiagogarbazza/express-route-resolver#readme",
   "dependencies": {
     "http-status-codes": "^1.0.6",
-    "lodash": "^4.16.4"
+    "lodash": "^4.16.4",
+    "winston": "^2.3.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
