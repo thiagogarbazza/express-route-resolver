@@ -19,7 +19,7 @@ describe('on-error', () => {
   });
 
   it('shold be response.status as INTERNAL_SERVER_ERROR', () => {
-    const error = new Error('');
+    const error = new Error('A any error');
     response.sendStatus = simpleMock.stub().returnWith(response);
 
     onError(response, error);
