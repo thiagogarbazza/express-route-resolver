@@ -1,4 +1,5 @@
 'use strict';
+
 const HttpStatus = require('http-status-codes');
 const onError = require('./on-error');
 
@@ -8,6 +9,7 @@ module.exports = function onDelete(response, promise) {
       if (result) {
         return response.sendStatus(HttpStatus.NO_CONTENT);
       }
+
       return response.sendStatus(HttpStatus.NOT_FOUND);
     })
     .catch(error => onError(response, error));
