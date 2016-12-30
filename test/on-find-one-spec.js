@@ -1,21 +1,32 @@
 'use strict';
-const onFindOne = require('../src/on-find-one');
+
+const {expect} = require('chai');
+const HttpStatus = require('http-status-codes');
+const mockery = require('mockery');
+const simpleMock = require('simple-mock');
+
+const RESULT_REJECT = {};
+const RESULT_RESOLVE = {
+  id: '1234',
+  nome: 'Test route resovle'
+};
+
+function onErrorMock(response) {
+  response.status = HttpStatus.INTERNAL_SERVER_ERROR;
+}
 
 describe('on-find-one', () => {
-  const RESULT_RESOLVE = {
-    id: '1234',
-    nome: 'Test route resovle'
-  };
-  const RESULT_REJECT = {};
+  let onFindOne;
   let response;
 
   before(() => {
-    mockery.registerMock('../src/on-error', (error, response) => response.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR));
+    mockery.registerMock('./on-error', onErrorMock);
     mockery.registerAllowable('../src/on-find-one');
+    onFindOne = require('../src/on-find-one');
   });
 
   after(() => {
-    mockery.deregisterMock('../src/on-error');
+    mockery.deregisterMock('./on-error');
   });
 
   beforeEach(() => {
@@ -29,7 +40,8 @@ describe('on-find-one', () => {
       .then(() => {
         expect(response.json.callCount).to.equal(1);
         expect(response.json.lastCall.arg).to.equal(RESULT_RESOLVE);
-        done();
+
+        return done();
       })
       .catch(done);
   });
@@ -41,19 +53,18 @@ describe('on-find-one', () => {
       .then(() => {
         expect(response.sendStatus.callCount).to.equal(1);
         expect(response.sendStatus.lastCall.arg).to.equal(HttpStatus.NOT_FOUND);
-        done();
+
+        return done();
       })
       .catch(done);
   });
 
   it('shold be response.status as INTERNAL_SERVER_ERROR', done => {
-    response.sendStatus = simpleMock.stub().returnWith(response);
-
     onFindOne(response, Promise.reject(RESULT_REJECT))
       .then(() => {
-        expect(response.sendStatus.callCount).to.equal(1);
-        expect(response.sendStatus.lastCall.arg).to.equal(HttpStatus.INTERNAL_SERVER_ERROR);
-        done();
+        expect(response.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        return done();
       })
       .catch(done);
   });

@@ -1,17 +1,28 @@
 'use strict';
-const onDelete = require('../src/on-delete');
+
+const {expect} = require('chai');
+const HttpStatus = require('http-status-codes');
+const mockery = require('mockery');
+const simpleMock = require('simple-mock');
+
+const RESULT_REJECT = {};
+
+function onErrorMock(response) {
+  response.status = HttpStatus.INTERNAL_SERVER_ERROR;
+}
 
 describe('on-delete', () => {
-  const RESULT_REJECT = {};
+  let onDelete;
   let response;
 
   before(() => {
-    mockery.registerMock('../src/on-error', (error, response) => response.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR));
+    mockery.registerMock('./on-error', onErrorMock);
     mockery.registerAllowable('../src/on-delete');
+    onDelete = require('../src/on-delete');
   });
 
   after(() => {
-    mockery.deregisterMock('../src/on-error');
+    mockery.deregisterMock('./on-error');
   });
 
   beforeEach(() => {
@@ -25,7 +36,8 @@ describe('on-delete', () => {
       .then(() => {
         expect(response.sendStatus.callCount).to.equal(1);
         expect(response.sendStatus.lastCall.arg).to.equal(HttpStatus.NO_CONTENT);
-        done();
+
+        return done();
       })
       .catch(done);
   });
@@ -37,19 +49,18 @@ describe('on-delete', () => {
       .then(() => {
         expect(response.sendStatus.callCount).to.equal(1);
         expect(response.sendStatus.lastCall.arg).to.equal(HttpStatus.NOT_FOUND);
-        done();
+
+        return done();
       })
       .catch(done);
   });
 
   it('shold be response.status as INTERNAL_SERVER_ERROR', done => {
-    response.sendStatus = simpleMock.stub().returnWith(response);
-
     onDelete(response, Promise.reject(RESULT_REJECT))
       .then(() => {
-        expect(response.sendStatus.callCount).to.equal(1);
-        expect(response.sendStatus.lastCall.arg).to.equal(HttpStatus.INTERNAL_SERVER_ERROR);
-        done();
+        expect(response.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        return done();
       })
       .catch(done);
   });
