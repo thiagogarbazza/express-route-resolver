@@ -1,12 +1,13 @@
 'use strict';
+
+const {expect} = require('chai');
+const HttpStatus = require('http-status-codes');
+const simpleMock = require('simple-mock');
+
 const onError = require('../src/on-error');
 
 const BUSINESS_ERROR = {
-  errors: [{
-    code: 'test'
-  }, {
-    code: 'test'
-  }],
+  errors: [{code: 'test'}, {code: 'test'}],
   message: 'has a business error',
   name: 'BusinessError'
 };
@@ -16,10 +17,12 @@ describe('on-error', () => {
 
   beforeEach(() => {
     response = {};
+    response.set = simpleMock.stub().returnWith(response);
   });
 
   it('shold be response.status as INTERNAL_SERVER_ERROR', () => {
     const error = new Error('A any error');
+
     response.sendStatus = simpleMock.stub().returnWith(response);
 
     onError(response, error);
@@ -32,11 +35,7 @@ describe('on-error', () => {
     response.json = simpleMock.stub().returnWith(response);
 
     const RESULT = {
-      error: [{
-        code: 'test'
-      }, {
-        code: 'test'
-      }],
+      error: [{code: 'test'}, {code: 'test'}],
       message: 'has a business error'
     };
 
